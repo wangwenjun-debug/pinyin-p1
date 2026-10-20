@@ -29,6 +29,7 @@ input[type=text],textarea{width:100%;font-size:20px;padding:12px;border:3px soli
 .parts{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
 .parts b{font-size:34px;background:var(--bg);border-radius:12px;padding:6px 14px}.parts span{font-size:26px;color:var(--mute)}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+.opts.two{grid-template-columns:1fr 1fr}
 .opts button{padding:16px 6px;font-size:30px;font-weight:700;border:3px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;cursor:pointer;font-family:inherit}
 .opts button small{display:block;font-size:16px}
 .say,.go,.sm{border:0;border-radius:14px;font-weight:700;cursor:pointer;font-family:inherit}
@@ -197,7 +198,7 @@ function ask(){
   $("num").textContent=qi+1;$("prog").style.width=(qi/N*100)+"%";
   $("q").textContent=cur.q;$("stage").innerHTML=cur.stage;$("next").classList.add("hidden");say("");
   if(cur.speak){$("say").onclick=()=>speak(cur.speak);speak(cur.speak);if(!("speechSynthesis" in window))say("这个浏览器不会朗读，请换别的玩法","bad")}
-  $("opts").innerHTML="";
+  $("opts").innerHTML="";$("opts").className="opts"+(cur.opts.length===4?" two":"");
   cur.opts.forEach(o=>{const b=document.createElement("button");b.innerHTML=o.l;b.onclick=()=>choose(b,o);$("opts").appendChild(b)});
 }
 function choose(b,o){
